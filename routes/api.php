@@ -21,12 +21,18 @@ use Illuminate\Support\Facades\Route;
 
 // public routes
 
-Route::post('/register', [UsersController::class, 'register']);
+// Route::post('/register', [UsersController::class, 'register']);
 
 // protected routes
 
-Route::group(['middleware' => ['auth:sanctum']], function () {
+Route::group(['middleware' => ['auth.basic']], function () {
     Route::get('/file', function(){
         return 'hajricod';
     });
 });
+
+Route::get('/', function () {
+    return ['Laravel' => app()->version()];
+});
+
+require __DIR__.'/auth.php';
